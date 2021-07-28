@@ -1,7 +1,5 @@
-# COURSENAME
-This is the repository for the LinkedIn Learning course `course-name`. The full course is available from [LinkedIn Learning][lil-course-url].
-
-![course-name-alt-text][lil-thumbnail-url] 
+# Permit to Cloud - Landing with Confidence in Azure
+This is the repository for the LinkedIn Learning course `Permit to Cloud - Landing with Confidence in Azure`. The full course is available from [LinkedIn Learning][lil-course-url].
 
 _See the readme file in the main branch for updated instructions and information._
 ## Instructions
