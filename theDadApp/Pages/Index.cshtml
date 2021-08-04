@@ -1,0 +1,31 @@
+﻿@page
+@using Microsoft.Extensions.Configuration
+@inject IConfiguration Config
+@model IndexModel
+@{
+    ViewData["Title"] = "Home page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Welcome <b>@Config["EnvName"]</b></h1>
+    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+</div>
+
+<h2 style="background-color:@Config["FavoriteColor"];" class="jumbotron font-weight-bold" id="joke"></h2>
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script type="text/javascript">$(document).ready(function () {
+        $.ajax({
+            type: 'GET',
+            url: 'https://icanhazdadjoke.com',
+            dataType: 'json',
+            success: function (msg) {
+                $('#joke').html(msg.joke);
+
+            },
+            error: function (request, status, error) {
+                $('#joke').html("Error getting joke");
+            }
+        });
+    });</script>
+
