@@ -1,0 +1,62 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "appName": {
+            "type": "string",
+            "metadata": {
+                "description": "description"
+            }
+        },
+        "src": {
+            "type": "string",
+            "allowedValues":["vsARM","code","bicep"],
+            "metadata": {
+                "description": "description"
+            }
+        }
+    },
+    "functions": [],
+    "variables": {
+        "prefix": "[concat(parameters('src'),'-',parameters('appName'))]",
+        "hostName" : "[concat(variables('prefix'),'-plan')]",
+        "siteNae" : "[concat(variables('prefix'),'-site')]"
+    },
+    "resources": [
+        {
+            "name": "[variables('hostName')]",
+            "type": "Microsoft.Web/serverfarms",
+            "apiVersion": "2018-02-01",
+            "location": "[resourceGroup().location]",
+            "sku": {
+                "name": "F1",
+                "capacity": 1
+            },
+            "tags": {
+                "displayName": "[variables('hostName')]"
+            },
+            "properties": {
+                "name": "[variables('hostName')]"
+            }
+        },
+        {
+            "name": "[variables('siteNae')]",
+            "type": "Microsoft.Web/sites",
+            "apiVersion": "2018-11-01",
+            "location": "[resourceGroup().location]",
+            "tags": {
+                "[concat('hidden-related:', resourceGroup().id, '/providers/Microsoft.Web/serverfarms', variables('hostName'))]": "Resource",
+                "displayName": "[variables('siteNae')]"
+            },
+            "dependsOn": [
+                "[resourceId('Microsoft.Web/serverfarms',  variables('hostName'))]"
+            ],
+            "properties": {
+                "name": "[variables('siteNae')]",
+                "serverFarmId": "[resourceId('Microsoft.Web/serverfarms',  variables('hostName'))]"
+            }
+        }
+
+    ],
+    "outputs": {}
+}
