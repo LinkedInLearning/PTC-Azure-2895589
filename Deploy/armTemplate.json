@@ -14,12 +14,12 @@
     "functions": [],
     "variables": {
         "prefix": "[concat(parameters('src'),'-',parameters('appName'))]",
-        "hostName" : "[concat(variables('prefix'),'-plan')]",
-        "siteName" : "[concat(variables('prefix'),'-site')]"
+        "myHost" : "[concat(variables('prefix'),'-plan')]",
+        "mySite" : "[concat(variables('prefix'),'-site')]"
     },
     "resources": [
         {
-            "name": "[variables('hostName')]",
+            "name": "[variables('myHost')]",
             "type": "Microsoft.Web/serverfarms",
             "apiVersion": "2018-02-01",
             "location": "[resourceGroup().location]",
@@ -28,15 +28,15 @@
             }
         },
         {
-            "name": "[variables('siteName')]",
+            "name": "[variables('mySite')]",
             "type": "Microsoft.Web/sites",
             "apiVersion": "2018-11-01",
             "location": "[resourceGroup().location]",
             "dependsOn": [
-                "[resourceId('Microsoft.Web/serverfarms',  variables('hostName'))]"
+                "[resourceId('Microsoft.Web/serverfarms',  variables('myHost'))]"
             ],
             "properties": {
-                "serverFarmId": "[resourceId('Microsoft.Web/serverfarms',  variables('hostName'))]"
+                "serverFarmId": "[resourceId('Microsoft.Web/serverfarms',  variables('myHost'))]"
             }
         }
 
