@@ -7,7 +7,8 @@
         },
         "src": {
             "type": "string",
-            "allowedValues":["vsARM","code","bicep"]
+            "allowedValues":["vsARM","code","bicep"],
+            "defaultValue":"code"
         }
     },
     "functions": [],
