@@ -13,12 +13,12 @@
     "functions": [],
     "variables": {
         "prefix": "[concat(parameters('src'),'-',parameters('appName'))]",
-        "hostName" : "[concat(variables('prefix'),'-plan')]",
-        "siteName" : "[concat(variables('prefix'),'-site')]"
+        "host" : "[concat(variables('prefix'),'-plan')]",
+        "site" : "[concat(variables('prefix'),'-site')]"
     },
     "resources": [
         {
-            "name": "[variables('hostName')]",
+            "name": "[variables('host')]",
             "type": "Microsoft.Web/serverfarms",
             "apiVersion": "2018-02-01",
             "location": "[resourceGroup().location]",
@@ -27,19 +27,15 @@
             }
         },
         {
-            "name": "[variables('siteName')]",
+            "name": "[variables('site')]",
             "type": "Microsoft.Web/sites",
             "apiVersion": "2018-11-01",
             "location": "[resourceGroup().location]",
-            "tags": {
-                "[concat('hidden-related:', resourceGroup().id, '/providers/Microsoft.Web/serverfarms', variables('hostName'))]": "Resource",
-                "displayName": "[variables('siteName')]"
-            },
             "dependsOn": [
-                "[resourceId('Microsoft.Web/serverfarms',  variables('hostName'))]"
+                "[resourceId('Microsoft.Web/serverfarms',  variables('host'))]"
             ],
             "properties": {
-                "serverFarmId": "[resourceId('Microsoft.Web/serverfarms',  variables('hostName'))]"
+                "serverFarmId": "[resourceId('Microsoft.Web/serverfarms',  variables('host'))]"
             }
         }
 
