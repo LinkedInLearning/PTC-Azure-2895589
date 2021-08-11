@@ -19,11 +19,28 @@ resource myHost 'Microsoft.Web/serverfarms@2018-02-01' = {
   }
 }
 
-module mySite 'module-std-website.bicep' = {
-  name: mySite_var
-  params: {
-    hostId: myHost.id
-    mySite_var: mySite_var
+var sites = [
+  {
+    name: 'DadApp'
+    color: 'lightgreen'
   }
-  
-}
+  {
+    name: 'MomApp'
+    color: 'lightyellow'
+  }
+  {
+    name: 'MikeSite'
+    color: 'lightblue'
+  }
+]
+
+module mySite 'module-std-website.bicep' = [for site in sites: {
+  name: '${src}-${site.name}-site'
+  params:  {
+    siteColor: site.color
+    siteName: '${src}-${site.name}-site'
+    hostId: myHost.id
+    
+  }
+}]
+
