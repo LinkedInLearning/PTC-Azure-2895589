@@ -2,7 +2,7 @@ name: Build and deploy .NET Core app to Windows WebApp theDadApp
 on:
   push:
     branches:
-    - master
+    - release
 env:
   AZURE_WEBAPP_NAME: theDadApp
   AZURE_WEBAPP_PACKAGE_PATH: theDadApp/publish
