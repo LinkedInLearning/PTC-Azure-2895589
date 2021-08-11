@@ -3,6 +3,11 @@
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
     <UserSecretsId>e9ce9cd9-7638-42ea-8fc1-e68003c79600</UserSecretsId>
+    <ApplicationInsightsResourceId>/subscriptions/b8c7d821-4fbb-4089-8978-b966512a6a45/resourcegroups/rg-dadapp/providers/Microsoft.Insights/components/theDadApp-ai</ApplicationInsightsResourceId>
   </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.ApplicationInsights.AspNetCore" Version="2.15.0" />
+  </ItemGroup>
 
 </Project>
